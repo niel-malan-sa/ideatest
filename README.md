@@ -40,7 +40,7 @@ Product idea research and scoring platform built around needs-based (Jobs-to-be-
 ### 1. Clone and install
 
 ```sh
-git clone https://github.com/YOUR_USERNAME/ideatest.git
+git clone https://github.com/IdeatestLUT/ideatest.git
 cd ideatest
 npm install
 ```

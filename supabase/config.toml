@@ -1,0 +1,22 @@
+project_id = "your-supabase-project-id"
+
+[functions.generate-framework]
+verify_jwt = false
+
+[functions.analyze-results]
+verify_jwt = false
+
+[functions.generate-positioning]
+verify_jwt = false
+
+[functions.generate-sales-messages]
+verify_jwt = false
+
+[functions.generate-clarifying-questions]
+verify_jwt = false
+
+[functions.regenerate-interview-guide]
+verify_jwt = false
+
+[functions.regenerate-steps]
+verify_jwt = false

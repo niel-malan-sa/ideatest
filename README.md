@@ -22,7 +22,7 @@ Product idea research and scoring platform built around needs-based (Jobs-to-be-
 | Styling | Tailwind CSS 3, shadcn/ui (Radix primitives) |
 | Routing | react-router-dom |
 | Backend | Supabase (Auth, Database, Edge Functions) |
-| AI | Lovable AI Gateway (used by Edge Functions) |
+| AI | OpenAI Chat Completions (lab deployment patch; upstream used Lovable AI Gateway) |
 | Data fetching | TanStack React Query |
 | Forms | react-hook-form + Zod validation |
 | Charts | Recharts |
@@ -80,10 +80,10 @@ VITE_SUPABASE_URL="https://your-project-id.supabase.co"
 
 ### 4. Deploy Edge Functions
 
-The AI features require a `LOVABLE_API_KEY` set as a Supabase secret:
+The AI SDR lab deployment uses OpenAI instead of Lovable AI Gateway because Lovable does not expose a confirmed standalone gateway key path for external Coolify deployments. Set these Supabase secrets:
 
 ```sh
-supabase secrets set LOVABLE_API_KEY=your-lovable-api-key
+supabase secrets set OPENAI_API_KEY=your-openai-api-key OPENAI_MODEL=gpt-4o-mini
 ```
 
 Then deploy all functions:
@@ -122,7 +122,7 @@ The `supabase/functions/` directory contains Deno-based edge functions that powe
 | `generate-positioning` | Creates positioning statements |
 | `generate-sales-messages` | Generates sales messaging copy |
 
-All functions use the [Lovable AI Gateway](https://ai.gateway.lovable.dev) and require the `LOVABLE_API_KEY` secret.
+All functions in this lab deployment use OpenAI Chat Completions and require the `OPENAI_API_KEY` secret. `OPENAI_MODEL` defaults to `gpt-4o-mini`.
 
 ## Project structure
 

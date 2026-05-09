@@ -1,4 +1,4 @@
-project_id = "your-supabase-project-id"
+project_id = "jcvysdgdqoyrrngqsohy"
 
 [functions.generate-framework]
 verify_jwt = false

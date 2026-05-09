@@ -132,17 +132,18 @@ ${idea.target_audience ? `**Target Audience:** ${idea.target_audience}` : ""}`;
 
     userPrompt += `\n\nGenerate a complete analysis framework with primary actor, process steps, need statements, and a themed interview guide that combines qualitative questions with outcome scoring.`;
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
+    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+    const OPENAI_MODEL = Deno.env.get("OPENAI_MODEL") || "gpt-4o-mini";
+    if (!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY not configured");
 
-    const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: OPENAI_MODEL,
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
@@ -165,7 +166,7 @@ ${idea.target_audience ? `**Target Audience:** ${idea.target_audience}` : ""}`;
       }
       const errText = await aiResponse.text();
       console.error("AI error:", aiResponse.status, errText);
-      throw new Error("AI gateway error");
+      throw new Error("OpenAI API error");
     }
 
     const aiData = await aiResponse.json();
